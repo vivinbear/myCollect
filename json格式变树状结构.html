@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+
+</body>
+
+<script>
+    var a = [
+        {
+            "id": "5dd459eb",
+            "name": "孙子",
+            "parentid": "5f1217d7",
+            "hasuser": "1",
+            "status": "1"
+        },
+        {
+            "id": "5f1217d7",
+            "name": "儿子",
+            "parentid": "e30f84d8",
+            "hasuser": "1",
+            "status": "1"
+        },
+        {
+            "id": "77827b7f",
+            "name": "孙子",
+            "parentid": "5f1217d7",
+            "hasuser": "1",
+            "status": "1"
+        },
+        {
+            "id": "e30f84d8",
+            "name": "爷爷",
+            "parentid": "",
+            "hasuser": "1",
+            "status": "1"
+        }
+    ];
+    function transData(a, idStr, pidStr, childrenStr) {
+        var r = [], hash = {}, id = idStr, pid = pidStr, children = childrenStr, i = 0, j = 0, len = a.length;
+        for (; i < len; i++) {
+            hash[a[i][id]] = a[i];
+        }
+        for (; j < len; j++) {
+            var aVal = a[j], hashVP = hash[aVal[pid]];
+            if (hashVP) {
+                !hashVP[children] && (hashVP[children] = []);
+                hashVP[children].push(aVal);
+            } else {
+                r.push(aVal);
+            }
+        }
+        return r;
+    }
+    var jsonData = eval(a);
+    console.log(jsonData)
+    console.log(typeof jsonData)
+    var b = transData(jsonData,'id','parentid','children');
+    console.log(b);
+</script>
+</html>
